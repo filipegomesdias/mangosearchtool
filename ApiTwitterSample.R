@@ -1,4 +1,13 @@
 ##### Análise de Text Mining #####
+install.packages("twitteR")
+install.packages("janeaustenr")
+install.packages("dplyr")
+install.packages("stringr")
+install.packages("tidytext")
+install.packages("tidyr")
+install.packages("ggplot2")
+install.packages("wordcloud")
+install.packages("reshape2")
 
 # Bibliotecas Necessárias
 library(twitteR)
@@ -101,6 +110,7 @@ if (file.exists(graphic_file_name)) {
       facet_wrap(~ date, ncol = 2, scales = "free_x") +
       ggsave(graphic_file_name)
     
+
     ##### Agrupamento de Palavras (não salva arquivo)
     cleaned_words %>%
       inner_join(sentimento_tbl) %>%
