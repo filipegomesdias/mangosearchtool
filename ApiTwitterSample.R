@@ -1,4 +1,4 @@
-##### An·lise de Text Mining #####
+##### An√°lise de Text Mining #####
 install.packages("twitteR")
 install.packages("janeaustenr")
 install.packages("dplyr")
@@ -9,7 +9,7 @@ install.packages("ggplot2")
 install.packages("wordcloud")
 install.packages("reshape2")
 
-# Bibliotecas Necess·rias
+# Bibliotecas Necess√°rias
 library(twitteR)
 library(janeaustenr)
 library(dplyr)
@@ -29,15 +29,15 @@ sentimento_tbl = NULL
 tweets_sentiment = NULL
 tweets_sentiment_text = NULL
 
-# DiretÛrio onde ser„o depositados os arquivos
+# Diret√≥rio onde ser√£o depositados os arquivos
 setwd("C:/Users/filip/OneDrive/Documentos/GitHub/mangosearchtool")
 
 graphic_file_name = paste("sentiment_", as.character(Sys.Date() - 1), ".jpg")
 
 if (file.exists(graphic_file_name)) {
-  print(paste("Processo j· foi executado para o dia: ", as.character(Sys.Date() - 1)))
+  print(paste("Processo j√° foi executado para o dia: ", as.character(Sys.Date() - 1)))
 } else{
-  # Passando par‚metros de Autorizacao da API: consumer-key, consumer-secret, access-token, access-secret
+  # Passando par√¢metros de Autorizacao da API: consumer-key, consumer-secret, access-token, access-secret
   setup_twitter_oauth(
     "WB2rYeu8aWDhYsuSraW79NtsD",
     "3KjvRFAy2FaJDUuobWVorW7I7pbFmV0cciXMZB08SNZrYhuwHJ",
@@ -70,7 +70,7 @@ if (file.exists(graphic_file_name)) {
     # Jogando resultado em uma tabela
     result_search <- twListToDF(result_search)
     
-    # Utilizando somente campos necess·rios
+    # Utilizando somente campos necess√°rios
     result_text <- result_search[, c(5, 8, 1)] %>%
       mutate(created = substr(created, 1, 10))
     
@@ -104,14 +104,14 @@ if (file.exists(graphic_file_name)) {
     tweets_sentiment_text = result_text %>%
       inner_join(tweets_sentiment)
     
-    ##### Plota Gr·fico do Dia
+    ##### Plota Gr√°fico do Dia
     ggplot(tweets_sentiment_text, aes(id, sentiment, fill = date)) +
       geom_bar(stat = "identity", show.legend = FALSE) +
       facet_wrap(~ date, ncol = 2, scales = "free_x") +
       ggsave(graphic_file_name)
     
 
-    ##### Agrupamento de Palavras (n„o salva arquivo)
+    ##### Agrupamento de Palavras (n√£o salva arquivo)
     cleaned_words %>%
       inner_join(sentimento_tbl) %>%
       count(word, sentiment, sort = TRUE) %>%
@@ -125,7 +125,7 @@ if (file.exists(graphic_file_name)) {
       "tweets_sentiment.csv",
       append = T,
       row.names = F,
-      col.names = T,
+      col.names = F,
       sep = ";"
     )
   }
